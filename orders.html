@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Crave Kitchen</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .orders-page {
+            padding: 120px 0 60px;
+            background: var(--color-background-alt);
+            min-height: 100vh;
+        }
+        .orders-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .order-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--color-primary);
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .order-id {
+            font-weight: 700;
+            color: var(--color-secondary);
+            font-size: 1.1rem;
+        }
+        .order-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .order-status {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .order-items {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 15px 0;
+        }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 0.95rem;
+        }
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--color-border);
+            padding-top: 15px;
+            font-weight: 700;
+        }
+        .order-total {
+            font-size: 1.2rem;
+            color: var(--color-primary);
+        }
+        .empty-orders {
+            text-align: center;
+            background: white;
+            padding: 60px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+        .empty-orders h2 {
+            margin-bottom: 15px;
+            font-family: var(--font-secondary);
+        }
+        .empty-orders a {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🔥</span>
+                <span class="logo-text">Crave Kitchen</span>
+            </a>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="cart.html" class="nav-link">Cart</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="orders-page">
+        <div class="container">
+            <h1 class="section-title" style="text-align: left; margin-bottom: 40px;">My <span class="highlight-script">Orders</span> History</h1>
+            <div id="orders-list-container">
+                <!-- Orders will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function renderOrders() {
+            const history = JSON.parse(localStorage.getItem('crave_order_history') || '[]');
+            const container = document.getElementById('orders-list-container');
+
+            if (history.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-orders">
+                        <span style="font-size: 4rem;">📦</span>
+                        <h2>No orders found</h2>
+                        <p>You haven't placed any orders yet. <a href="index.html#menu">Start ordering now!</a></p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = history.map(order => `
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #${order.id}</div>
+                            <div class="order-date">${order.date}</div>
+                        </div>
+                        <div class="order-status">${order.status}</div>
+                    </div>
+                    <ul class="order-items">
+                        ${order.items.map(item => `
+                            <li class="order-item">
+                                <span>${item.quantity}x ${item.name} ${item.spice ? `<small style="color: #666;">(${item.spice})</small>` : ''}</span>
+                                <span>₹${parseInt(String(item.price).replace(/[^0-9]/g, '')) * item.quantity}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                    <div class="order-footer">
+                        <span>Total Paid via ${order.payment.toUpperCase()}</span>
+                        <div class="order-total">₹${order.total}</div>
+                    </div>
+                    <div style="margin-top: 10px; font-size: 0.85rem; color: #666;">
+                        <strong>Delivered to:</strong> ${order.address}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderOrders);
+    </script>
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Crave Kitchen</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .cart-page {
+            padding: 120px 0 60px;
+            background: var(--color-background-alt);
+            min-height: 100vh;
+        }
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+        .cart-title {
+            font-family: var(--font-secondary);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--color-secondary);
+            text-align: center;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .cart-item-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .cart-item-price {
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--color-border);
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .qty-val {
+            font-weight: 600;
+            width: 20px;
+            text-align: center;
+        }
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        .cart-summary {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid var(--color-border);
+            text-align: right;
+        }
+        .total-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-secondary);
+            margin-bottom: 20px;
+        }
+        .btn-checkout {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+        }
+        .empty-cart a {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .clear-cart {
+            color: #666;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🔥</span>
+                <span class="logo-text">Crave Kitchen</span>
+            </a>
+            <a href="index.html" class="btn btn-outline">Add More Items</a>
+        </div>
+    </nav>
+
+    <div class="cart-page">
+        <div class="container">
+            <div class="cart-container" id="cart-container">
+                <h1 class="cart-title">Your Shopping Cart</h1>
+                <div class="cart-actions">
+                    <span>Items in your cart</span>
+                    <button class="clear-cart" id="clear-cart">Clear All</button>
+                </div>
+                <div id="cart-items-list">
+                    <!-- Items will be injected here -->
+                </div>
+                <div class="cart-summary" id="cart-summary">
+                    <div class="summary-line" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: #666;">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">₹0</span>
+                    </div>
+                    <div class="summary-line" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: #666;">
+                        <span>GST (5%):</span>
+                        <span id="tax">₹0</span>
+                    </div>
+                    <div class="summary-line" style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: #666;">
+                        <span>Delivery Fee:</span>
+                        <span id="delivery-fee">₹30</span>
+                    </div>
+                    <div class="total-price" id="grand-total" style="font-size: 1.8rem; margin-top: 1rem;">Total: ₹0</div>
+                    <button class="btn btn-primary btn-checkout" onclick="processCheckout()" style="margin-top: 1rem;">Place Order Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Order Confirmation Prompt -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirm Order</h3>
+                <button class="modal-close" id="close-checkout-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <span style="font-size: 3rem;">🛍️</span>
+                </div>
+                <h4 style="text-align: center; margin-bottom: 15px;">Order Summary</h4>
+                <div id="checkout-summary-details" style="background: var(--color-background-alt); padding: 15px; border-radius: var(--radius-md); font-size: 0.95rem; margin-bottom: 15px;">
+                    <!-- Details will be injected here -->
+                </div>
+                
+                <div style="margin-bottom: 15px; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                        <label style="font-weight: 600; font-size: 0.9rem;">Delivery Address:</label>
+                        <button id="detect-location" style="background: none; border: none; color: var(--color-primary); cursor: pointer; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+                            📍 Detect My Location
+                        </button>
+                    </div>
+                    <textarea id="delivery-address" placeholder="Enter your full address..." style="width: 100%; padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); resize: none; height: 60px; font-family: inherit; font-size: 0.9rem;"></textarea>
+                    <div id="location-status" style="font-size: 0.75rem; color: #666; margin-top: 4px; display: none;">Detecting...</div>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem;">Payment Method:</label>
+                    <select id="payment-method" style="width: 100%; padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); font-family: inherit;">
+                        <option value="upi">UPI (GPay, PhonePe, Paytm)</option>
+                        <option value="card">Credit / Debit Card</option>
+                        <option value="wallet">Digital Wallet</option>
+                        <option value="cod">Cash on Delivery</option>
+                    </select>
+                </div>
+
+                <div style="margin-top: 15px; text-align: center; color: #666; font-size: 0.9rem;">
+                    Estimated Delivery: <span id="est-time" style="font-weight: 600; color: var(--color-secondary);">30-45 mins</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-checkout">Edit Cart</button>
+                <button class="btn btn-primary" id="confirm-checkout">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getCart() {
+            return JSON.parse(localStorage.getItem('crave_cart') || '[]');
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('crave_cart', JSON.stringify(cart));
+            // Trigger storage event for same-tab updates
+            window.dispatchEvent(new Event('storage'));
+        }
+
+        function renderCart() {
+            console.log('Rendering cart...');
+            const params = new URLSearchParams(window.location.search);
+            const urlName = params.get('name');
+            const urlPrice = params.get('price');
+            const urlImg = params.get('img');
+
+            if (urlName && urlPrice) {
+                let cart = getCart();
+                const exists = cart.find(i => i.name === urlName);
+                if (!exists) {
+                    cart.push({
+                        name: urlName,
+                        price: urlPrice,
+                        img: urlImg || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200&h=200&fit=crop',
+                        quantity: 1
+                    });
+                    saveCart(cart);
+                }
+                if (window.location.search) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }
+
+            const cart = getCart();
+            const listContainer = document.getElementById('cart-items-list');
+            const cartContainer = document.getElementById('cart-container');
+            const summaryEl = document.getElementById('cart-summary');
+
+            if (!cart || cart.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <h2>Your cart is empty</h2>
+                        <p>Go back to <a href="index.html#menu">our menu</a> to add delicious food.</p>
+                        <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 8px; font-size: 0.8rem; text-align: left; overflow-wrap: break-word;">
+                            <strong>Local Memory Status:</strong><br>
+                            ${localStorage.getItem('crave_cart') || 'No data found (null)'}
+                        </div>
+                    </div>
+                `;
+                if (summaryEl) summaryEl.style.display = 'none';
+                return;
+            }
+
+            if (summaryEl) summaryEl.style.display = 'block';
+            listContainer.innerHTML = '';
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                const priceNum = parseInt(String(item.price).replace(/[^0-9]/g, '')) || 0;
+                const itemTotal = priceNum * item.quantity;
+                subtotal += itemTotal;
+
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <img src="${item.img}" alt="${item.name}" class="cart-item-img" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200&h=200&fit=crop'">
+                    <div class="cart-item-info">
+                        <h3 class="cart-item-name">${item.name} ${item.spice ? `<small style="color: #666; font-size: 0.8rem;">(${item.spice})</small>` : ''}</h3>
+                        <p class="cart-item-price">₹${priceNum}</p>
+                        <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                    </div>
+                    <div class="cart-item-qty">
+                        <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
+                        <span class="qty-val">${item.quantity}</span>
+                        <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                    </div>
+                `;
+                listContainer.appendChild(itemElement);
+            });
+
+            const tax = Math.round(subtotal * 0.05);
+            const deliveryFee = 30;
+            const grandTotal = subtotal + tax + deliveryFee;
+
+            document.getElementById('subtotal').textContent = `₹${subtotal}`;
+            document.getElementById('tax').textContent = `₹${tax}`;
+            document.getElementById('grand-total').textContent = `Total: ₹${grandTotal}`;
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            let icon = type === 'success' ? '✅' : '⚠️';
+            toast.innerHTML = `<span class="toast-icon">${icon}</span><span class="toast-message">${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
+            }, 3000);
+        }
+
+        window.updateQty = function(index, delta) {
+            const cart = getCart();
+            cart[index].quantity += delta;
+            if (cart[index].quantity < 1) cart[index].quantity = 1;
+            saveCart(cart);
+            renderCart();
+            showToast('Quantity updated');
+        };
+
+        window.removeItem = function(index) {
+            const cart = getCart();
+            const name = cart[index].name;
+            cart.splice(index, 1);
+            saveCart(cart);
+            renderCart();
+            showToast(`${name} removed from cart`, 'warning');
+        };
+
+        document.getElementById('clear-cart').onclick = function() {
+            if (confirm('Clear all items from cart?')) {
+                localStorage.removeItem('crave_cart');
+                renderCart();
+                showToast('Cart cleared');
+            }
+        };
+
+        const checkoutModal = document.getElementById('checkout-modal');
+        const summaryDetails = document.getElementById('checkout-summary-details');
+
+        window.processCheckout = function() {
+            const cart = getCart();
+            if (cart.length === 0) return;
+
+            let detailsHTML = '<ul style="list-style: none;">';
+            let subtotal = 0;
+            cart.forEach(item => {
+                const price = parseInt(item.price.toString().replace(/[^0-9]/g, ''));
+                detailsHTML += `<li style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span>${item.quantity}x ${item.name}</span>
+                    <span>₹${price * item.quantity}</span>
+                </li>`;
+                subtotal += price * item.quantity;
+            });
+            const tax = Math.round(subtotal * 0.05);
+            const total = subtotal + tax + 30;
+
+            detailsHTML += `</ul>
+                <div style="border-top: 1px solid #ddd; margin-top: 10px; padding-top: 10px; font-weight: 700;">
+                    <div style="display: flex; justify-content: space-between;"><span>Total Amount:</span><span>₹${total}</span></div>
+                </div>`;
+            
+            summaryDetails.innerHTML = detailsHTML;
+            checkoutModal.classList.add('show');
+        };
+
+        document.getElementById('close-checkout-modal').onclick = 
+        document.getElementById('cancel-checkout').onclick = () => checkoutModal.classList.remove('show');
+
+        document.getElementById('confirm-checkout').onclick = function() {
+            const address = document.getElementById('delivery-address').value.trim();
+            if (!address) {
+                alert('Please enter your delivery address!');
+                return;
+            }
+
+            const orderId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+            const payment = document.getElementById('payment-method').value;
+            const cart = getCart();
+            const now = new Date();
+            
+            // Calculate total for history
+            let subtotal = 0;
+            cart.forEach(item => {
+                const price = parseInt(item.price.toString().replace(/[^0-9]/g, ''));
+                subtotal += price * item.quantity;
+            });
+            const tax = Math.round(subtotal * 0.05);
+            const total = subtotal + tax + 30;
+
+            // 1. Save Last Order for Chatbot
+            localStorage.setItem('last_order_id', orderId);
+            localStorage.setItem('last_order_status', 'Preparing');
+            localStorage.setItem('last_order_time', now.getTime());
+
+            // 2. Add to Order History
+            const orderRecord = {
+                id: orderId,
+                date: now.toLocaleString(),
+                items: cart,
+                total: total,
+                address: address,
+                payment: payment,
+                status: 'Confirmed'
+            };
+            
+            let history = JSON.parse(localStorage.getItem('crave_order_history') || '[]');
+            history.unshift(orderRecord); // Add new order to the top
+            localStorage.setItem('crave_order_history', JSON.stringify(history));
+
+            showToast(`Order ${orderId} placed successfully!`);
+            localStorage.removeItem('crave_cart');
+            checkoutModal.classList.remove('show');
+            
+            setTimeout(() => {
+                alert(`Order confirmed! ID: ${orderId}\nYou can view your order history in the 'My Orders' section.`);
+                window.location.href = 'index.html';
+            }, 1000);
+        };
+
+        document.getElementById('detect-location').onclick = function() {
+            const status = document.getElementById('location-status');
+            const addressBox = document.getElementById('delivery-address');
+            
+            if (!navigator.geolocation) {
+                alert('Geolocation is not supported by your browser');
+                return;
+            }
+
+            status.style.display = 'block';
+            status.textContent = 'Locating...';
+            status.style.color = '#666';
+
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const { latitude, longitude } = position.coords;
+                    try {
+                        // Using OpenStreetMap Nominatim for free reverse geocoding
+                        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+                        const data = await response.json();
+                        if (data && data.display_name) {
+                            addressBox.value = data.display_name;
+                            status.textContent = '📍 Location detected successfully!';
+                            status.style.color = 'var(--color-success)';
+                        } else {
+                            addressBox.value = `${latitude}, ${longitude}`;
+                            status.textContent = 'Coordinates detected (Address lookup failed)';
+                        }
+                    } catch (error) {
+                        addressBox.value = `${latitude}, ${longitude}`;
+                        status.textContent = 'Error fetching address details';
+                    }
+                },
+                () => {
+                    status.textContent = 'Permission denied. Please enter address manually.';
+                    status.style.color = 'var(--color-error)';
+                }
+            );
+        };
+
+        document.addEventListener('DOMContentLoaded', renderCart);
+    </script>
+</body>
+</html>

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crave Kitchen - India's Best Food Delivery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">
+                <span class="logo-icon">🔥</span>
+                <span class="logo-text">Crave Kitchen</span>
+            </a>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu">
+                <span class="hamburger"></span>
+            </button>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#specials" class="nav-link">Specials</a></li>
+                <li><a href="#tips" class="nav-link">Tips</a></li>
+                <li><a href="#delivery" class="nav-link">Delivery</a></li>
+            </ul>
+            
+            <div class="nav-auth">
+                <a href="cart.html" title="View Cart" style="font-size: 1.5rem; text-decoration: none; margin-right: 15px; position: relative;">
+                    🛒<span id="cart-count" style="position: absolute; top: -5px; right: -10px; background: var(--color-primary); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; font-weight: bold; display: none;">0</span>
+                </a>
+                <a href="login.html" class="nav-login">Login</a>
+                <a href="register.html" class="nav-register">Register</a>
+            </div>
+            <a href="#contact" class="nav-reserve-btn">Book Table</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-badge">🔥 India's Best Restaurant</span>
+            <h1 class="hero-title">Taste The <span class="highlight">Extraordinary</span></h1>
+            <p class="hero-subtitle">From crispy Dosa to spicy Biryani - Order your favorite food now! Free delivery on orders above ₹300</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-primary btn-lg">
+                    <span>Order Now</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                </a>
+                <a href="#specials" class="btn btn-outline btn-lg">Today's Specials</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">15K+</span>
+                    <span class="stat-label">Happy Customers</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Menu Items</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4.8⭐</span>
+                    <span class="stat-label">Customer Rating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Our Menu</span>
+                <h2 class="section-title">Delicious Food <span class="highlight-script">Menu</span></h2>
+                <p class="section-description">Choose from our wide variety of cuisines - Indian, Chinese, Burgers, Pizza & more!</p>
+            </div>
+            
+            <div class="menu-controls" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                <div class="menu-tabs" style="margin-bottom: 0;">
+                    <button class="menu-tab active" data-category="all">
+                        <span class="tab-icon">🍽️</span>
+                        <span>All</span>
+                    </button>
+                    <button class="menu-tab" data-category="morning">
+                        <span class="tab-icon">🌅</span>
+                        <span>Morning</span>
+                    </button>
+                    <button class="menu-tab" data-category="night">
+                        <span class="tab-icon">🌙</span>
+                        <span>Night</span>
+                    </button>
+                    <button class="menu-tab" data-category="tea">
+                        <span class="tab-icon">🧋</span>
+                        <span>Tea & Coffee</span>
+                    </button>
+                    <button class="menu-tab" data-category="snacks">
+                        <span class="tab-icon">🍜</span>
+                        <span>Snacks</span>
+                    </button>
+                    <button class="menu-tab" data-category="desserts">
+                        <span class="tab-icon">🍰</span>
+                        <span>Desserts</span>
+                    </button>
+                    <button class="menu-tab" data-category="icecream">
+                        <span class="tab-icon">🍨</span>
+                        <span>Ice Cream</span>
+                    </button>
+                </div>
+                
+                <div class="sort-control" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <label for="menu-sort" style="font-weight: 600; color: var(--color-secondary);">Sort By:</label>
+                    <select id="menu-sort" style="padding: 0.5rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); outline: none; cursor: pointer;">
+                        <option value="default">Default</option>
+                        <option value="rating">High Rating</option>
+                        <option value="time">Fastest Delivery</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="menu-grid" id="menu-grid">
+                <!-- Morning Items -->
+                <div class="menu-card" data-category="morning" data-rating="4.8" data-time="20" data-price="120">
+                    <div class="menu-card-image">
+                        <img src="images/masala-dosa.jpg" alt="Masala Dosa" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400&h=300&fit=crop'">
+                        <div class="menu-card-badge popular">🔥 Popular</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Masala Dosa</h3>
+                            <p class="menu-card-price">₹120</p>
+                        </div>
+                        <p class="menu-card-description">Crispy rice crepe filled with spicy potato mash, served with sambar and chutney.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 20 min</span>
+                            <span class="menu-card-rating">⭐ 4.8</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Night Items -->
+                <div class="menu-card" data-category="night" data-rating="4.5" data-time="15" data-price="60">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&h=300&fit=crop" alt="Soft Idly" loading="lazy">
+                        <div class="menu-card-badge popular">Best Seller</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Soft Steam Idly</h3>
+                            <p class="menu-card-price">₹60</p>
+                        </div>
+                        <p class="menu-card-description">Three fluffy steamed rice cakes served with variety of chutneys and hot sambar.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 15 min</span>
+                            <span class="menu-card-rating">⭐ 4.5</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="night" data-rating="4.2" data-time="25" data-price="80">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1630383249896-424e482df921?w=400&h=300&fit=crop" alt="Plain Dosa" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Golden Plain Dosa</h3>
+                            <p class="menu-card-price">₹80</p>
+                        </div>
+                        <p class="menu-card-description">Thin, crispy crepe made from fermented rice and lentil batter.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 25 min</span>
+                            <span class="menu-card-rating">⭐ 4.2</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="night" data-rating="4.6" data-time="15" data-price="70">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=300&fit=crop" alt="Bread Omelette" loading="lazy">
+                        <div class="menu-card-badge new">New</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Bread Omelette</h3>
+                            <p class="menu-card-price">₹70</p>
+                        </div>
+                        <p class="menu-card-description">Toasted bread slices with a spicy masala omelette and green chutney.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 15 min</span>
+                            <span class="menu-card-rating">⭐ 4.6</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tea & Coffee -->
+                <div class="menu-card" data-category="tea" data-rating="4.9" data-time="10" data-price="120">
+                    <div class="menu-card-image">
+                        <img src="images/coffee.jpg" alt="Hot Coffee" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop'">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Hot Cappuccino</h3>
+                            <p class="menu-card-price">₹120</p>
+                        </div>
+                        <p class="menu-card-description">Freshly brewed coffee with steamed milk and a thick layer of foam.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 10 min</span>
+                            <span class="menu-card-rating">⭐ 4.9</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="tea" data-rating="4.7" data-time="12" data-price="90">
+                    <div class="menu-card-image">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.7ewbgk25vtPlsjPtmi-OqwHaE8?pid=Api&P=0&h=180" alt="Masala Chai" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Authentic Masala Chai</h3>
+                            <p class="menu-card-price">₹90</p>
+                        </div>
+                        <p class="menu-card-description">Traditional Indian tea brewed with aromatic spices and ginger.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 12 min</span>
+                            <span class="menu-card-rating">⭐ 4.7</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="tea" data-rating="4.8" data-time="15" data-price="150">
+                    <div class="menu-card-image">
+                        <img src="https://static.toiimg.com/photo/100227448.cms" alt="Filter Coffee" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">South Indian Filter Coffee</h3>
+                            <p class="menu-card-price">₹150</p>
+                        </div>
+                        <p class="menu-card-description">Strong and frothy coffee made with a traditional brass filter.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 15 min</span>
+                            <span class="menu-card-rating">⭐ 4.8</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="tea" data-rating="4.6" data-time="8" data-price="130">
+                    <div class="menu-card-image">
+                        <img src="https://cdn.pixabay.com/photo/2024/06/26/06/58/ai-generated-8854172_1280.jpg" alt="Green Tea" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Honey Lemon Green Tea</h3>
+                            <p class="menu-card-price">₹130</p>
+                        </div>
+                        <p class="menu-card-description">Refreshing and healthy green tea infused with organic honey and lemon.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 8 min</span>
+                            <span class="menu-card-rating">⭐ 4.6</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="tea" data-rating="4.5" data-time="10" data-price="180">
+                    <div class="menu-card-image">
+                        <img src="https://i.pinimg.com/originals/fd/a9/ad/fda9ad56b9d62070fec105cd93693129.jpg" alt="Cold Coffee" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Classic Cold Coffee</h3>
+                            <p class="menu-card-price">₹180</p>
+                        </div>
+                        <p class="menu-card-description">Creamy blended cold coffee topped with a scoop of vanilla ice cream.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 10 min</span>
+                            <span class="menu-card-rating">⭐ 4.5</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="tea" data-rating="4.9" data-time="5" data-price="210">
+                    <div class="menu-card-image">
+                        <img src="https://img.freepik.com/premium-photo/iced-latte-coffee-refreshing-cold-beverage-isolated-white-background_49047-775.jpg?w=2000" alt="Iced Latte" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Caramel Iced Latte</h3>
+                            <p class="menu-card-price">₹210</p>
+                        </div>
+                        <p class="menu-card-description">Refreshing iced latte with a swirl of rich caramel sauce.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 5 min</span>
+                            <span class="menu-card-rating">⭐ 4.9</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snacks -->
+                <div class="menu-card" data-category="snacks" data-rating="4.4" data-time="15" data-price="50">
+                    <div class="menu-card-image">
+                        <img src="https://img.freepik.com/premium-photo/high-view-snacks-white-background-4k-hd-photo-product-design_1193781-35885.jpg?w=2000" alt="Masala Munch" loading="lazy">
+                        <div class="menu-card-badge premium">Premium</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Masala Munch Mix</h3>
+                            <p class="menu-card-price">₹50</p>
+                        </div>
+                        <p class="menu-card-description">A perfect blend of spicy and savory Indian snacks for your tea time.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 15 min</span>
+                            <span class="menu-card-rating">⭐ 4.4</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="snacks" data-rating="4.3" data-time="10" data-price="40">
+                    <div class="menu-card-image">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.UlUgT304asmNSMeQiboFxgHaHa?pid=Api&P=0&h=180" alt="Crispy Chips" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Crispy Banana Chips</h3>
+                            <p class="menu-card-price">₹40</p>
+                        </div>
+                        <p class="menu-card-description">Thinly sliced, golden fried salted banana chips from Kerala.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 10 min</span>
+                            <span class="menu-card-rating">⭐ 4.3</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="snacks" data-rating="4.1" data-time="5" data-price="30">
+                    <div class="menu-card-image">
+                        <img src="https://digitalassets.pepsico.com/m/3327ca92d1315ac2/Hi_Res-00028400734035_C1C1.jpg" alt="Potato Chips" loading="lazy">
+                        <div class="menu-card-badge popular">Popular</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Classic Potato Chips</h3>
+                            <p class="menu-card-price">₹30</p>
+                        </div>
+                        <p class="menu-card-description">Classic salted crispy potato chips for an instant energy boost.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 5 min</span>
+                            <span class="menu-card-rating">⭐ 4.1</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="snacks" data-rating="4.0" data-time="20" data-price="60">
+                    <div class="menu-card-image">
+                        <img src="https://s7d9.scene7.com/is/image/dollargeneral/pop-13323201-1" alt="Popcorn" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Butter Salted Popcorn</h3>
+                            <p class="menu-card-price">₹60</p>
+                        </div>
+                        <p class="menu-card-description">Freshly popped corn kernels tossed in melted butter and sea salt.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 20 min</span>
+                            <span class="menu-card-rating">⭐ 4.0</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="snacks" data-rating="4.5" data-time="15" data-price="45">
+                    <div class="menu-card-image">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.83qmdx1gR6D96bmM17U3BgHaFj?pid=Api&P=0&h=180" alt="Mini Samosas" loading="lazy">
+                        <div class="menu-card-badge new">New</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Mini Masala Samosas</h3>
+                            <p class="menu-card-price">₹45</p>
+                        </div>
+                        <p class="menu-card-description">Crunchy bite-sized samosas filled with spicy potato and peas.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 15 min</span>
+                            <span class="menu-card-rating">⭐ 4.5</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desserts -->
+                <div class="menu-card" data-category="desserts" data-rating="4.7" data-time="15" data-price="280">
+                    <div class="menu-card-image">
+                        <img src="https://www.tasteofhome.com/wp-content/uploads/2018/01/Cherry-Delight-Dessert_EXPS_TOHcom23_27515_P2_MD_03_22_4b.jpg" alt="Cherry Delight" loading="lazy">
+                        <div class="menu-card-badge premium">Chef's Choice</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Cherry Delight</h3>
+                            <p class="menu-card-price">₹280</p>
+                        </div>
+                        <p class="menu-card-description">A heavenly layered dessert with a graham cracker crust and sweet cherry topping.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 15 min</span>
+                            <span class="menu-card-rating">⭐ 4.7</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="desserts" data-rating="4.8" data-time="20" data-price="350">
+                    <div class="menu-card-image">
+                        <img src="https://cakeshungry.com/wp-content/uploads/2024/06/Serving-Chocolate-Mousse-Cake-750x1125.png" alt="Chocolate Mousse Cake" loading="lazy">
+                        <div class="menu-card-badge popular">Popular</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Chocolate Mousse Cake</h3>
+                            <p class="menu-card-price">₹350</p>
+                        </div>
+                        <p class="menu-card-description">Decadent chocolate cake topped with a light and airy chocolate mousse layer.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 20 min</span>
+                            <span class="menu-card-rating">⭐ 4.8</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="desserts" data-rating="4.6" data-time="15" data-price="220">
+                    <div class="menu-card-image">
+                        <img src="https://www.cookingclassy.com/wp-content/uploads/2020/02/chocolate-mousse-3.jpg" alt="Chocolate Mousse" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Silk Chocolate Mousse</h3>
+                            <p class="menu-card-price">₹220</p>
+                        </div>
+                        <p class="menu-card-description">Classic French chocolate mousse served with whipped cream and chocolate curls.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 15 min</span>
+                            <span class="menu-card-rating">⭐ 4.6</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="desserts" data-rating="4.5" data-time="10" data-price="190">
+                    <div class="menu-card-image">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.ZKOcVTtTfnJTlbsyWzvC4gHaHa?pid=Api&P=0&h=180" alt="Fruit Tart" loading="lazy">
+                        <div class="menu-card-badge new">New</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Gourmet Fruit Tart</h3>
+                            <p class="menu-card-price">₹190</p>
+                        </div>
+                        <p class="menu-card-description">Buttery pastry crust filled with custard and topped with fresh seasonal fruits.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 10 min</span>
+                            <span class="menu-card-rating">⭐ 4.5</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ice Cream -->
+                <div class="menu-card" data-category="icecream" data-rating="4.9" data-time="5" data-price="180">
+                    <div class="menu-card-image">
+                        <img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?w=400&h=300&fit=crop" alt="Ice Cream" loading="lazy">
+                        <div class="menu-card-badge popular">Popular</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Vanilla Sundae</h3>
+                            <p class="menu-card-price">₹180</p>
+                        </div>
+                        <p class="menu-card-description">Creamy vanilla ice cream topped with chocolate sauce and nuts.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 5 min</span>
+                            <span class="menu-card-rating">⭐ 4.9</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="icecream" data-rating="4.7" data-time="10" data-price="150">
+                    <div class="menu-card-image">
+                        <img src="https://insanelygoodrecipes.com/wp-content/uploads/2023/07/Bowl-of-Strawberry-Ice-Cream-with-Cones.jpg" alt="Strawberry Ice Cream" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Strawberry Bliss</h3>
+                            <p class="menu-card-price">₹150</p>
+                        </div>
+                        <p class="menu-card-description">Fresh strawberry ice cream served with crunchy waffle cones.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 10 min</span>
+                            <span class="menu-card-rating">⭐ 4.7</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="icecream" data-rating="4.8" data-time="5" data-price="160">
+                    <div class="menu-card-image">
+                        <img src="https://www.cuisinart.co.uk/dw/image/v2/ABAF_PRD/on/demandware.static/-/Sites-uk-cuisinart-sfra-Library/default/dw02d70fe5/images/recipes/classic-vanilla-ice-cream.jpg?sw=1200&sh=1200&sm=fit" alt="Classic Vanilla" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Classic French Vanilla</h3>
+                            <p class="menu-card-price">₹160</p>
+                        </div>
+                        <p class="menu-card-description">Rich and smooth vanilla ice cream made with real Madagascar vanilla beans.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 5 min</span>
+                            <span class="menu-card-rating">⭐ 4.8</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="icecream" data-rating="4.6" data-time="15" data-price="170">
+                    <div class="menu-card-image">
+                        <img src="https://cdn.loveandlemons.com/wp-content/uploads/2023/06/homemade-ice-cream-recipe.jpg" alt="Chocolate Chip" loading="lazy">
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Homemade Choco-Chip</h3>
+                            <p class="menu-card-price">₹170</p>
+                        </div>
+                        <p class="menu-card-description">Creamy milk chocolate ice cream loaded with dark chocolate chips.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 15 min</span>
+                            <span class="menu-card-rating">⭐ 4.6</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="icecream" data-rating="4.9" data-time="8" data-price="190">
+                    <div class="menu-card-image">
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.c_1m-iVpMjRGOjeq9lMpqQHaNK?pid=Api&P=0&h=180" alt="Mango Ice Cream" loading="lazy">
+                        <div class="menu-card-badge popular">Summer Special</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Mango Alphonso Special</h3>
+                            <p class="menu-card-price">₹190</p>
+                        </div>
+                        <p class="menu-card-description">Made with pure Alphonso mango pulp for a rich, tropical flavor.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 8 min</span>
+                            <span class="menu-card-rating">⭐ 4.9</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="icecream" data-rating="5.0" data-time="12" data-price="200">
+                    <div class="menu-card-image">
+                        <img src="https://i.pinimg.com/originals/4e/8f/54/4e8f546a930ef4478c3c310e42c0ec07.jpg" alt="Dark Chocolate" loading="lazy">
+                        <div class="menu-card-badge premium">Premium</div>
+                    </div>
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <h3 class="menu-card-title">Belgian Dark Chocolate</h3>
+                            <p class="menu-card-price">₹200</p>
+                        </div>
+                        <p class="menu-card-description">Intense dark chocolate ice cream crafted with the finest Belgian cocoa.</p>
+                        <div class="menu-card-meta" style="margin-bottom: 1rem; border: none; padding-bottom: 0; display: flex; justify-content: space-between;">
+                            <span class="menu-card-time">⏱️ 12 min</span>
+                            <span class="menu-card-rating">⭐ 5.0</span>
+                        </div>
+                        <div class="menu-card-actions">
+                            <button class="btn-add-cart">Add to Cart</button>
+                            <button class="btn btn-primary btn-order-now" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: var(--radius-md);">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="menu-no-results" class="no-results">
+                    <p>No items found in this category.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Dishes Section -->
+    <section class="specials" id="specials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Chef's Special</span>
+                <h2 class="section-title">Our <span class="highlight-script">Special</span> Dishes</h2>
+                <p class="section-description">Top rated dishes loved by 15,000+ customers - Must Try!</p>
+            </div>
+            <div class="specials-grid">
+                <div class="special-card">
+                    <div class="special-badge">⭐ Top Rated</div>
+                    <img src="https://fairgaze.com/images/UploadedImages/thumbs/0309384_0309384_tyuiop.jpg" alt="Special Street Food" onerror="this.src='https://images.unsplash.com/photo-1601050690597-df056fb1d745?w=400&h=300&fit=crop'">
+                    <div class="special-content">
+                        <h3>Tangy Street Mix</h3>
+                        <div class="special-rating">★★★★★ (2,500+ reviews)</div>
+                        <p class="special-price">₹150</p>
+                        <button class="btn btn-primary btn-order-now">Order Now</button>
+                    </div>
+                </div>
+                <div class="special-card">
+                    <div class="special-badge">🔥 Best Seller</div>
+                    <img src="https://thumbs.dreamstime.com/b/exploring-tangy-spicy-refreshing-delight-pani-puri-india-s-favourite-street-food-experience-selective-focus-327023936.jpg" alt="Pani Puri" onerror="this.src='https://images.unsplash.com/photo-1601050690597-df056fb1d745?w=400&h=300&fit=crop'">
+                    <div class="special-content">
+                        <h3>Special Pani Puri</h3>
+                        <div class="special-rating">★★★★★ (3,000+ reviews)</div>
+                        <p class="special-price">₹80</p>
+                        <button class="btn btn-primary btn-order-now">Order Now</button>
+                    </div>
+                </div>
+                <div class="special-card">
+                    <div class="special-badge">✨ Premium</div>
+                    <img src="https://images5.alphacoders.com/357/thumb-1920-357914.jpg" alt="Premium Coffee" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop'">
+                    <div class="special-content">
+                        <h3>Chef's Special Coffee</h3>
+                        <div class="special-rating">★★★★★ (1,500+ reviews)</div>
+                        <p class="special-price">₹180</p>
+                        <button class="btn btn-primary btn-order-now">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cooking Tips Section -->
+    <section class="tips" id="tips">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Kitchen Tips</span>
+                <h2 class="section-title">Cooking <span class="highlight-script">Tips</span> for Beginners</h2>
+                <p class="section-description">Master your kitchen with these professional secrets</p>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">🥗</div>
+                    <h3>1. Prep First</h3>
+                    <p>Read recipes fully and chop all ingredients before starting (Mise en place) to stay stress-free.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🧂</div>
+                    <h3>2. Season Smart</h3>
+                    <p>Season gradually and taste frequently. Adjust salt and acidity (lemon/vinegar) for perfect balance.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🔥</div>
+                    <h3>3. Master Heat</h3>
+                    <p>High: Searing. Medium: Regular cooking. Low: Simmering. Right heat is the secret to great taste.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🍲</div>
+                    <h3>4. Core Skills</h3>
+                    <p>Focus on mastering Sautéing, Boiling, Roasting, and Frying to cook almost anything.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🧼</div>
+                    <h3>5. Clean & Go</h3>
+                    <p>Clean as you cook. Keep your workspace organized to save massive time and effort later.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">⭐</div>
+                    <h3>6. Pro Advice</h3>
+                    <p>Don’t overcrowd pans, let meat rest, use fresh ingredients, and always learn from mistakes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Section -->
+    <section class="delivery" id="delivery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Fast Delivery</span>
+                <h2 class="section-title">Delivery <span class="highlight-script">Near You</span></h2>
+            </div>
+            <div class="delivery-info">
+                <div class="delivery-card">
+                    <div class="delivery-icon">🚴</div>
+                    <h3>Delivery Person Near You</h3>
+                    <p class="delivery-status">📍 Location detected: 2.5 km away</p>
+                    <p class="delivery-name">Delivery Partner: Rahul Sharma</p>
+                    <p class="delivery-rating">⭐ 4.8 Rating | 1,200+ deliveries</p>
+                </div>
+                <div class="delivery-card">
+                    <div class="delivery-icon">⚡</div>
+                    <h3>Speed Delivery</h3>
+                    <p class="delivery-time">⏱️ Express Delivery: 25-30 min</p>
+                    <p class="delivery-time">⏱️ Normal Delivery: 45-60 min</p>
+                    <p class="delivery-charge">🚚 Delivery Charge: ₹30 (Free above ₹300)</p>
+                </div>
+                <div class="delivery-card">
+                    <div class="delivery-icon">🛡️</div>
+                    <h3>Safe Delivery</h3>
+                    <p>✅ Contactless delivery available</p>
+                    <p>✅ Temperature check for delivery partners</p>
+                    <p>✅ Sealed packaging for hygiene</p>
+                    <p>✅ Live order tracking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <a href="#home" class="logo">
+                            <span class="logo-icon">🔥</span>
+                            <span class="logo-text">Crave Kitchen</span>
+                        </a>
+                        <p class="footer-tagline">India's favorite food delivery - Serving happiness since 2020</p>
+                        <div class="footer-social">
+                            <a href="#" class="social-icon" aria-label="Facebook">📘</a>
+                            <a href="#" class="social-icon" aria-label="Instagram">📷</a>
+                            <a href="#" class="social-icon" aria-label="Twitter">🐦</a>
+                            <a href="#" class="social-icon" aria-label="TikTok">🎵</a>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#menu">Our Menu</a></li>
+                            <li><a href="#specials">Specials</a></li>
+                            <li><a href="#delivery">Delivery</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="#menu">Indian Food</a></li>
+                            <li><a href="#menu">Chinese</a></li>
+                            <li><a href="#menu">Burgers</a></li>
+                            <li><a href="#menu">Pizza</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-newsletter">
+                        <h4>Newsletter</h4>
+                        <p>Get exclusive offers and updates delivered to your inbox</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2024 Crave Kitchen. All rights reserved. | Made with ❤️ in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-notification" id="cart-notification">
+        <div class="cart-icon">🛒</div>
+        <div class="cart-content">
+            <p class="cart-message">Item added to cart!</p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Add to Cart Prompt -->
+    <div class="modal-overlay" id="add-to-cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add to Cart</h3>
+                <button class="modal-close" id="close-add-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="prompt-item-info">
+                    <img src="" alt="" class="prompt-item-img" id="prompt-img">
+                    <div>
+                        <h4 id="prompt-name" style="margin-bottom: 5px;">Item Name</h4>
+                        <p id="prompt-price" style="color: var(--color-primary); font-weight: 700;">₹0</p>
+                    </div>
+                </div>
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 10px;">Select Quantity:</p>
+                <div class="prompt-qty-selector">
+                    <button class="prompt-qty-btn" id="prompt-minus">-</button>
+                    <span class="prompt-qty-val" id="prompt-qty">1</span>
+                    <button class="prompt-qty-btn" id="prompt-plus">+</button>
+                </div>
+
+                <p style="color: #666; font-size: 0.9rem; margin: 15px 0 10px;">Spice Level:</p>
+                <div class="spice-selector" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <label style="flex: 1; text-align: center; padding: 8px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); cursor: pointer; font-size: 0.85rem;">
+                        <input type="radio" name="spice" value="Mild" style="margin-right: 5px;"> Mild
+                    </label>
+                    <label style="flex: 1; text-align: center; padding: 8px; border: 1px solid var(--color-primary); border-radius: var(--radius-sm); cursor: pointer; font-size: 0.85rem; background: #fff5f5;">
+                        <input type="radio" name="spice" value="Medium" checked style="margin-right: 5px;"> Medium
+                    </label>
+                    <label style="flex: 1; text-align: center; padding: 8px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); cursor: pointer; font-size: 0.85rem;">
+                        <input type="radio" name="spice" value="Spicy" style="margin-right: 5px;"> Spicy
+                    </label>
+                </div>
+
+                <div style="text-align: right; font-weight: 700; font-size: 1.1rem; color: var(--color-secondary);">
+                    Subtotal: <span id="prompt-total">₹0</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-add">Cancel</button>
+                <button class="btn btn-primary" id="confirm-add">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Chatbot -->
+    <div class="chatbot-container">
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span>👨‍🍳 Kitchen Assistant</span>
+                    <button id="toggle-voice" title="Toggle Voice" style="background:none; border:none; color:white; cursor:pointer; font-size:1rem; opacity: 0.7;">🔇</button>
+                </div>
+                <button id="close-chat" style="background:none; border:none; color:white; cursor:pointer; font-size:1.2rem;">&times;</button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot-message">Hello! I'm your Crave Kitchen assistant. How can I help you today? You can ask about food or track your order!</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="chat-input" placeholder="Type a message...">
+                <button class="chat-mic" id="chat-mic" title="Voice Input">🎤</button>
+                <button class="chat-send" id="chat-send">➤</button>
+            </div>
+        </div>
+        <div class="chatbot-toggle" id="chatbot-toggle">💬</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
