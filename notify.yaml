@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notifications-cm
+  namespace: argocd
+
+data:
+  context: |
+    argocdUrl: https://localhost:8080
+
+  service.telegram: |
+    token: 8085365056:AAF9IRh1l1iktpR8s2Law3nowmaaCGo-L6c
+
+  trigger.on-health-degraded: |
+    - when: app.status.health.status == 'Degraded'
+      send: [telegram]
+
+  trigger.on-health-healthy: |
+    - when: app.status.health.status == 'Healthy'
+      send: [telegram]

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: food-web
-        image: mikasa15/food-web:wrong
+        image: mikasa15/food-web:wrong   # ✅ FIXED
         imagePullPolicy: Always
         ports:
         - containerPort: 80
