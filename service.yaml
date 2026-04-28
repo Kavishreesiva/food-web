@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: food-web-service
+  name: self-healing-web-service
 spec:
   type: NodePort
   selector:
-    app: food-web
+    app: self-healing-web
   ports:
-    - port: 80
+    - protocol: TCP
+      port: 80
       targetPort: 80
-      nodePort: 30007
-

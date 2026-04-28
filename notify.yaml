@@ -11,6 +11,10 @@ data:
   service.telegram: |
     token: 8085365056:AAF9IRh1l1iktpR8s2Law3nowmaaCGo-L6c
 
+  template.telegram: |
+    message: |
+      🚨 Application {{.app.metadata.name}} is {{.app.status.health.status}}
+
   trigger.on-health-degraded: |
     - when: app.status.health.status == 'Degraded'
       send: [telegram]
