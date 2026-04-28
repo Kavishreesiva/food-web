@@ -1,20 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: self-healing-web
+  name: food-web
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: self-healing-web
+      app: food-web
   template:
     metadata:
       labels:
-        app: self-healing-web
+        app: food-web
     spec:
       containers:
-      - name: self-healing-web
+      - name: food-web
         image: mikasa15/food-web:latest
-        imagePullPolicy: Always
         ports:
         - containerPort: 80
