@@ -15,5 +15,6 @@ spec:
       containers:
       - name: food-web
         image: mikasa15/food-web:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80

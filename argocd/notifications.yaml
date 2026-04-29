@@ -3,22 +3,29 @@ kind: ConfigMap
 metadata:
   name: argocd-notifications-cm
   namespace: argocd
-
 data:
-  context: |
-    argocdUrl: https://localhost:8080
-
   service.telegram: |
-    token: 8085365056:AAF9IRh1l1iktpR8s2Law3nowmaaCGo-L6c
+    token: $TELEGRAM_BOT_TOKEN
 
-  template.telegram: |
+  template.app-health-status: |
     message: |
       🚨 Application {{.app.metadata.name}} is {{.app.status.health.status}}
 
   trigger.on-health-degraded: |
     - when: app.status.health.status == 'Degraded'
-      send: [telegram]
+      send: [app-health-status]
 
   trigger.on-health-healthy: |
     - when: app.status.health.status == 'Healthy'
-      send: [telegram]
+      send: [app-health-status]
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: argocd-notifications-secret
+  namespace: argocd
+type: Opaque
+stringData:
+  TELEGRAM_BOT_TOKEN: <TELEGRAM_BOT_TOKEN>
+  TELEGRAM_CHAT_ID: <TELEGRAM_CHAT_ID>

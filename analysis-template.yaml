@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: success-rate-check
+spec:
+  metrics:
+  - name: health-check
+    interval: 10s
+    count: 3
+    successCondition: result == 1
+    failureLimit: 1
+    provider:
+      web:
+        url: http://food-web.default.svc.cluster.local
+        timeoutSeconds: 5
