@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control Panel</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero glass">
+        <div class="hero-copy">
+          <p class="eyebrow">Kubernetes Operations Center</p>
+          <h1>Control Panel</h1>
+          <p class="subtitle">Live Minikube health, recovery automation, deployment control, and operational telemetry for food-web.</p>
+        </div>
+        <div class="hero-side">
+          <div id="statusBadge" class="status-badge unknown">
+            <span class="status-dot"></span>
+            <span id="statusText">Loading</span>
+          </div>
+          <div class="version-pill">Version <strong id="versionValue">unknown</strong></div>
+        </div>
+      </section>
+
+      <section id="recoveryBanner" class="recovery-banner hidden">
+        <span class="recovery-pulse"></span>
+        <strong>Recovery Mode ACTIVE</strong>
+        <span id="recoveryText">Failed pods detected.</span>
+      </section>
+
+      <section id="errorPanel" class="error-panel hidden">
+        <strong>Unable to read cluster status.</strong>
+        <span id="errorMessage"></span>
+      </section>
+
+      <section class="metrics-grid">
+        <article class="metric-card glass">
+          <span class="metric-label">Total Pods</span>
+          <strong id="totalPods">0</strong>
+          <small>Active deployment pods</small>
+        </article>
+        <article class="metric-card glass">
+          <span class="metric-label">Running Pods</span>
+          <strong id="runningPods">0</strong>
+          <small>Ready workload capacity</small>
+        </article>
+        <article class="metric-card glass">
+          <span class="metric-label">Failed Pods</span>
+          <strong id="failedPods">0</strong>
+          <small>Pending cleanup queue</small>
+        </article>
+        <article class="metric-card glass">
+          <span class="metric-label">Health</span>
+          <strong><span id="healthValue">0</span>%</strong>
+          <small>Running / active total</small>
+        </article>
+        <article class="metric-card glass wide-metric">
+          <span class="metric-label">Last Updated</span>
+          <strong id="lastUpdated">--</strong>
+          <small id="deploymentName">food-web</small>
+        </article>
+      </section>
+
+      <section class="control-grid">
+        <article class="status-panel glass">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow compact">Deployment</p>
+              <h2 id="statusValue">Loading</h2>
+            </div>
+            <div class="deploy-chip" id="deploymentChip">food-web</div>
+          </div>
+          <p id="statusHint" class="hint">Checking cluster state...</p>
+          <div id="failedPodList" class="failed-list"></div>
+          <div class="actions">
+            <button id="refreshBtn" class="action-btn secondary" type="button">
+              <span class="btn-icon">↻</span>
+              Refresh
+            </button>
+            <button id="restartBtn" class="action-btn danger" type="button">
+              <span class="btn-icon">⟳</span>
+              Restart Deployment
+            </button>
+            <button id="fixBtn" class="action-btn warning" type="button">
+              <span class="btn-icon">⌫</span>
+              Fix Cluster
+            </button>
+          </div>
+        </article>
+
+        <article class="activity-panel glass">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow compact">Activity</p>
+              <h2>Recent Actions</h2>
+            </div>
+          </div>
+          <div id="activityFeed" class="activity-feed"></div>
+        </article>
+      </section>
+
+      <section class="logs-panel glass">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow compact">System Logs</p>
+            <h2>Live Event Stream</h2>
+          </div>
+          <span id="logCount" class="log-count">0 events</span>
+        </div>
+        <div id="systemLogs" class="terminal"></div>
+      </section>
+
+      <div id="loader" class="loader hidden" aria-label="Loading status"></div>
+      <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
